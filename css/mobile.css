@@ -405,3 +405,29 @@
     border: 0 !important;
   }
 }
+
+/* Correctif mobile : miniatures du dossier OUTILS contenues dans le carre. */
+@media (max-width: 800px) {
+  .mobile-tools-mini {
+    display: grid !important;
+    grid-template-columns: repeat(3, 12px) !important;
+    grid-template-rows: repeat(3, 12px) !important;
+    gap: 3px !important;
+    padding: 9px !important;
+    align-content: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+  .mobile-tools-mini img {
+    display: block !important;
+    box-sizing: border-box !important;
+    width: 12px !important;
+    height: 12px !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 12px !important;
+    max-height: 12px !important;
+    object-fit: contain !important;
+    margin: 0 !important;
+  }
+}
