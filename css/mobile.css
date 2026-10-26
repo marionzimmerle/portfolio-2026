@@ -122,7 +122,7 @@
   .icon[data-id^="project-"] .icon__custom-img { display: none; }
 
   /* No "selected" blue label after a tap: it opens right away */
-  .icon.is-selected .icon__label-text { background: none; box-shadow: none; }
+  .icon.is-selected .icon__label-text { background: none; box-shadow: none; color: #2b2f3a; }
   .icon.is-selected .icon__image { filter: none; }
 
   /* ---------- Bottom dock ---------- */

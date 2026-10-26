@@ -39,7 +39,8 @@
 
 .widgets-profile-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .photo-widget { height: 132px; padding: 0; overflow: hidden; border: none; }
-.photo-widget img { width: 100%; height: 100%; object-fit: cover; }
+/* object-position keeps the face in frame for head-and-shoulders portraits */
+.photo-widget img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
 .identity-widget { height: 132px; display: flex; flex-direction: column; justify-content: space-between; }
 .profile-widget__identity { min-width: 0; display: flex; flex-direction: column; }
 .profile-widget__identity strong { font-size: 14px; line-height: 1.2; }

@@ -6,8 +6,16 @@
      background: url("../assets/wallpaper.jpg") center / cover no-repeat;
    ========================================================================= */
 
+/* Pastel wallpaper (colors taken from the EVO bike range).
+   The old image assets/fond.jpg is no longer used. */
 body {
-  background: url("../assets/fond.jpg") center / cover no-repeat fixed;
+  background:
+    radial-gradient(at 12% 18%, #cdb8f5 0, transparent 48%),
+    radial-gradient(at 88% 12%, #ffd9a8 0, transparent 45%),
+    radial-gradient(at 80% 88%, #f9a99b 0, transparent 50%),
+    radial-gradient(at 18% 88%, #a9d4ff 0, transparent 50%),
+    #f4effc;
+  background-attachment: fixed;
 }
 
 .desktop {
