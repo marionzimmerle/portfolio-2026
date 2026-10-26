@@ -43,7 +43,7 @@ const DESKTOP_ITEMS = [
   // ---------------------------------------------------------------------
   {
     id: "project-01",
-    name: "evo",
+    name: "EVO",
     type: "folder",
     kind: "project",
     icon: "assets/icons/folder.png", 
@@ -117,7 +117,7 @@ const DESKTOP_ITEMS = [
   },
   {
     id: "project-02",
-    name: "fudgee",
+    name: "FUDGEE",
     type: "folder",
     kind: "project",
     icon: "assets/icons/folder.png", 
@@ -258,14 +258,14 @@ const DESKTOP_ITEMS = [
   },
   {
     id: "project-04",
-    name: "app’art",
+    name: "ANA",
     type: "folder",
     kind: "project",
     icon: "assets/icons/folder.png", 
     x: 320,
     y: 480,
     window: {
-      title: "APP’ART — MOBILE APP",
+      title: "ANA’S GALLERY",
       width: 1050,
       height: 760,
       centered: true,
@@ -274,7 +274,7 @@ const DESKTOP_ITEMS = [
           <header class="project-case__header">
             <div>
               <p class="project-case__eyebrow">CONCEPT PROJECT · MOBILE APP</p>
-              <h2>App’Art</h2>
+              <h2>Ana’s Gallery</h2>
               <p class="project-case__lead">A mobile application dedicated to an illustrator, allowing visitors to discover her universe and purchase artworks or creative goods.</p>
             </div>
             <dl class="project-case__meta">
@@ -289,10 +289,10 @@ const DESKTOP_ITEMS = [
             <a class="project-case__prototype" href="https://www.figma.com/proto/aj03wH3d51VSyItVjAhryn/App-artist---Marion-Zimmerl%C3%A9?page-id=0%3A1&amp;node-id=20%3A63&amp;starting-point-node-id=20%3A63" target="_blank" rel="noopener">View interactive prototype ↗</a>
           </div>
 
-          <section class="project-gallery project-gallery--extracts" aria-label="App’Art project gallery">
+          <section class="project-gallery project-gallery--extracts" aria-label="Ana’s Gallery project gallery">
             <div class="project-gallery__stage">
               <button class="project-gallery__arrow project-gallery__arrow--prev" type="button" data-gallery-prev aria-label="Previous page">‹</button>
-              <div class="project-gallery__slides" data-page-prefix="assets/projects/appart/appart-page-" data-page-count="4" data-page-label="App’Art"></div>
+              <div class="project-gallery__slides" data-page-prefix="assets/projects/appart/appart-page-" data-page-count="4" data-page-label="Ana’s Gallery"></div>
               <button class="project-gallery__arrow project-gallery__arrow--next" type="button" data-gallery-next aria-label="Next page">›</button>
             </div>
             <div class="project-gallery__footer">
@@ -302,12 +302,12 @@ const DESKTOP_ITEMS = [
           </section>
           <div class="appart-pdf-links">
             <a href="assets/projects/appart/appart-project.pdf" target="_blank" rel="noopener">Open full PDF</a>
-            <a href="assets/projects/appart/appart-project.pdf" download="AppArt_Marion_Zimmerle.pdf">Download PDF</a>
+            <a href="assets/projects/appart/appart-project.pdf" download="Anas_Gallery_Marion_Zimmerle.pdf">Download PDF</a>
           </div>
 
           <section class="project-case__story">
             <h3>The project</h3>
-            <p>App’Art is an app concept dedicated to the illustrator Ana Miminoshvili. The challenge: give her a space that suits her to present her work, share her news and sell her creations directly, without going through a generic platform.</p>
+            <p>Ana’s Gallery is an app concept dedicated to the illustrator Ana Miminoshvili. The challenge: give her a space that suits her to present her work, share her news and sell her creations directly, without going through a generic platform.</p>
             <h3>Approach</h3>
             <p>Ana’s illustrations are colorful, teeming, almost dreamlike. The interface therefore makes the opposite choice: a sober black and white that steps back to give the artworks the whole stage. Light and dark modes adapt the experience to every use. The identity pairs Montserrat for headings with Roboto for body text.</p>
             <h3>An app in four spaces</h3>

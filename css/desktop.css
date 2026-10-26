@@ -74,3 +74,10 @@ body {
     padding-inline: 8px;
   }
 }
+
+/* Desktop-only wallpaper stability; mobile presentation stays unchanged. */
+@media (min-width:801px) {
+  html, body { background-color:#f4effc; }
+  body { background-image: radial-gradient(at 12% 18%,#cdb8f5 0,transparent 48%),radial-gradient(at 88% 12%,#ffd9a8 0,transparent 45%),radial-gradient(at 80% 88%,#f9a99b 0,transparent 50%),radial-gradient(at 18% 88%,#a9d4ff 0,transparent 50%) !important; }
+  .desktop {background:transparent!important;}
+}

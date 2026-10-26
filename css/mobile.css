@@ -10,6 +10,9 @@
    ========================================================================= */
 
 /* Elements that only exist on mobile are hidden everywhere else */
+.mobile-tools-launch { display: none; }
+.mobile-tools-overlay { display: none; }
+
 .mobile-dock { display: none; }
 .intro-widget > .intro-widget__touch { display: none; }
 
@@ -295,7 +298,7 @@
 /* Mobile-only project icons — desktop assets and layout unchanged. */
 @media (max-width: 700px) {
   .icon[data-id="project-01"] .icon__image {
-    background-size: 175% auto !important;
+    background-size: 190% auto !important;
     background-position: 50% 50% !important;
   }
   .icon[data-id="project-02"] .icon__image {
@@ -311,5 +314,94 @@
     background-image: url("../assets/projects/mobile-icons/appart-a.png") !important;
     background-size: cover !important;
     background-position: center !important;
+  }
+}
+
+/* Mobile dock consistency and correctly centered mail artwork */
+@media (max-width: 800px) {
+ .mobile-dock__item { box-sizing:border-box; flex:0 0 54px; border:0; padding:0; display:flex; align-items:center; justify-content:center; border-radius:14px; overflow:hidden; }
+ .mobile-dock__item--paper,.mobile-dock__item--mail {background:linear-gradient(145deg,#fefcff,#e6e5f7 65%,#f7e5ee); box-shadow:inset 0 1px 2px #fff,0 3px 8px #8d87a044;}
+ .mobile-dock__cv-mark {font:800 25px/1 Arial,sans-serif; color:#171717; letter-spacing:-.045em;}
+ .mobile-dock__item img.mobile-dock__mail-image {display:block; width:82%;height:82%;object-fit:contain; transform:translateX(-4px);margin:0; flex-shrink:0;}
+ .icon[data-id="cv"] {display:none!important;}
+ .icon[data-id="project-01"] {order:1;}.icon[data-id="project-02"] {order:2;}.icon[data-id="project-03"] {order:3;}.icon[data-id="project-04"] {order:4;}
+ .icon[data-id="play"] {order:6;}.icon[data-id="color-lab"] {order:7;}.icon[data-id="archives"] {order:8;}
+ .mobile-tools-launch {order:5; display:flex; flex-direction:column; align-items:center;gap:7px; width:100%;border:0;background:none;color:#262637;font:inherit;cursor:pointer;}
+ .mobile-tools-mini {box-sizing:border-box;width:64px;height:64px;border-radius:15px;background:#ffffff77;backdrop-filter:blur(8px);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px;padding:9px;box-shadow:0 6px 14px #182c4e30;}
+ .mobile-tools-mini img {width:100%;height:100%;object-fit:contain;}
+ .mobile-tools-launch span {font-size:11px;font-weight:600;}
+ .mobile-tools-overlay:not([hidden]) {position:fixed;inset:0;z-index:700;display:flex;align-items:center;justify-content:center;padding:20px;background:#17152d55;backdrop-filter:blur(12px);}
+ .mobile-tools-panel {box-sizing:border-box;width:min(100%,390px);padding:24px 16px 30px;border-radius:30px;background:linear-gradient(135deg,#ffffffdd,#fff4e5c9);box-shadow:0 15px 55px #20213d44;}
+ .mobile-tools-heading {text-align:center;font-size:21px;font-weight:600;position:relative;margin-bottom:25px;}
+ .mobile-tools-heading button {position:absolute;right:0;top:-8px;background:none;border:0;font-size:30px;color:#444;cursor:pointer;}
+ .mobile-tools-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 6px;}
+ .mobile-tools-grid>div {display:flex;align-items:center;flex-direction:column;gap:7px;min-width:0;}
+ .mobile-tools-grid img {width:62px;height:62px;object-fit:contain;}
+ .mobile-tools-grid span {font-size:11px;text-align:center;color:#45424c;white-space:nowrap;}
+}
+
+/* Normalized mobile tool tiles: each app occupies the same visual area. */
+@media (max-width:800px) {
+  .mobile-tools-grid img {width:66px;height:66px;max-width:100%;object-fit:contain;display:block;}
+  .mobile-tools-grid > div {gap:5px;}
+  .mobile-tools-mini img {width:100%;height:100%;object-fit:contain;}
+  /* The artwork itself has been trimmed; no offset is necessary. */
+  .mobile-dock__item img.mobile-dock__mail-image {width:78%;height:78%;transform:none!important;object-position:center center;}
+}
+
+/* LinkedIn dock icon: larger lettering and soft lavender tile. */
+@media (max-width: 800px) {
+  .mobile-dock__item--linkedin {
+    background: linear-gradient(145deg, #f6f0ff, #e2d9f4 70%, #d7d0ef);
+    color: #51436e;
+    font: 800 33px/1 Arial, sans-serif;
+    letter-spacing: -.075em;
+    text-indent: -.06em;
+    box-shadow: inset 0 1px 2px #fff, 0 3px 8px #8d87a044;
+  }
+}
+
+/* Mobile LinkedIn: black, thinner lettering matching the CV icon. */
+@media (max-width: 800px) {
+  .mobile-dock__item--linkedin { color: #111 !important; font-family: Arial, Helvetica, sans-serif !important; font-weight: 500 !important; font-size: 33px !important; letter-spacing: -.065em !important; }
+}
+
+/* ELLE: new cover only on mobile, keep original folder on desktop. */
+@media (max-width: 800px) {
+  .icon[data-id="project-03"] .icon__image {
+    background-image: url("../assets/icons/elle-mobile-international.webp") !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  /* LinkedIn-style bold monogram, in black on the existing pastel tile. */
+  .mobile-dock__item--linkedin {
+    color: #111 !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 34px !important;
+    letter-spacing: -0.085em !important;
+    text-indent: -0.03em !important;
+  }
+}
+
+/* Mobile only: show CHESS, COLOR LAB and ARCHIVES as standalone artwork. */
+@media (max-width: 800px) {
+  .icon[data-id="play"] .icon__image,
+  .icon[data-id="color-lab"] .icon__image,
+  .icon[data-id="archives"] .icon__image {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+  .icon[data-id="play"] .icon__image::before,
+  .icon[data-id="color-lab"] .icon__image::before,
+  .icon[data-id="archives"] .icon__image::before {
+    background: none !important;
+    box-shadow: none !important;
+    border: 0 !important;
   }
 }

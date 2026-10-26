@@ -15,10 +15,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/reset.css">
-<link rel="stylesheet" href="css/desktop.css?v=3">
+<link rel="stylesheet" href="css/desktop.css?v=21">
 <link rel="stylesheet" href="css/menubar.css?v=13">
 <link rel="stylesheet" href="css/icons.css?v=6">
-<link rel="stylesheet" href="css/dock.css?v=13">
+<link rel="stylesheet" href="css/dock.css?v=15">
 <link rel="stylesheet" href="css/windows.css?v=5">
 <link rel="stylesheet" href="css/game.css?v=26">
 <link rel="stylesheet" href="css/cv.css?v=7">
@@ -26,7 +26,8 @@
 <link rel="stylesheet" href="css/panels.css?v=12">
 <link rel="stylesheet" href="css/colorlab.css?v=1">
   <link rel="stylesheet" href="css/projects.css?v=11">
-  <link rel="stylesheet" href="css/mobile.css?v=6">
+  <link rel="stylesheet" href="css/mobile.css?v=25">
+<link rel="stylesheet" href="css/signature.css?v=1">
 </head>
 <body>
 
@@ -211,46 +212,46 @@
   <!-- ===================== SOFTWARE DOCK ===================== -->
   <!-- Decorative only: the items show tools and are not links. -->
   <div class="software-dock" aria-label="Software used">
-    <div class="software-dock__item" data-name="Photoshop" aria-label="Photoshop">
+    <div class="software-dock__item" data-name="PHOTOSHOP" aria-label="Photoshop">
       <img class="software-dock__icon" src="assets/apps/photoshop.svg" alt="">
     </div>
-    <div class="software-dock__item" data-name="Illustrator" aria-label="Illustrator">
+    <div class="software-dock__item" data-name="ILLUSTRATOR" aria-label="Illustrator">
       <img class="software-dock__icon" src="assets/apps/illustrator.svg" alt="">
     </div>
-    <div class="software-dock__item" data-name="InDesign" aria-label="InDesign">
+    <div class="software-dock__item" data-name="INDESIGN" aria-label="InDesign">
       <img class="software-dock__icon" src="assets/apps/indesign.svg" alt="">
     </div>
-    <div class="software-dock__item" data-name="Premiere Pro" aria-label="Premiere Pro">
+    <div class="software-dock__item" data-name="PREMIERE PRO" aria-label="Premiere Pro">
       <img class="software-dock__icon" src="assets/apps/premierepro.svg" alt="">
     </div>
-    <div class="software-dock__item" data-name="After Effects" aria-label="After Effects">
+    <div class="software-dock__item" data-name="AFTER EFFECTS" aria-label="After Effects">
       <img class="software-dock__icon" src="assets/apps/aftereffects.svg" alt="">
     </div>
-    <div class="software-dock__item" data-name="Figma" aria-label="Figma">
+    <div class="software-dock__item" data-name="FIGMA" aria-label="Figma">
       <span class="software-dock__icon-frame">
         <img class="software-dock__icon software-dock__icon--figma-img" src="assets/apps/figma.png" alt="">
       </span>
     </div>
-    <div class="software-dock__item" data-name="Visual Studio Code" aria-label="Visual Studio Code">
+    <div class="software-dock__item" data-name="VISUAL STUDIO CODE" aria-label="Visual Studio Code">
       <span class="software-dock__icon-frame">
         <img class="software-dock__icon software-dock__icon--vscode-img" src="assets/apps/vscode.png" alt="">
       </span>
     </div>
-    <div class="software-dock__item" data-name="Blender" aria-label="Blender">
+    <div class="software-dock__item" data-name="BLENDER" aria-label="Blender">
       <span class="software-dock__icon-frame">
         <img class="software-dock__icon software-dock__icon--blender-img" src="assets/apps/blender.webp" alt="">
       </span>
     </div>
-    <div class="software-dock__item" data-name="Microsoft 365" aria-label="Microsoft 365">
+    <div class="software-dock__item" data-name="MICROSOFT 365" aria-label="Microsoft 365">
       <img class="software-dock__microsoft-img" src="assets/apps/microsoft-365.png" alt="">
     </div>
     <span class="software-dock__separator" aria-hidden="true"></span>
-    <button class="software-dock__item software-dock__item--interactive" id="aboutDockButton" type="button" data-name="Terminal" aria-label="Open Terminal">
+    <button class="software-dock__item software-dock__item--interactive" id="aboutDockButton" type="button" data-name="TERMINAL" aria-label="Open Terminal">
       <span class="software-dock__icon-frame software-dock__icon-frame--terminal">
         <img class="software-dock__terminal-img" src="assets/icons/terminal.png" alt="">
       </span>
     </button>
-    <button class="software-dock__item software-dock__item--trash software-dock__item--interactive" id="trashDockButton" type="button" data-name="Trash" aria-label="Open Trash">
+    <button class="software-dock__item software-dock__item--trash software-dock__item--interactive" id="trashDockButton" type="button" data-name="TRASH" aria-label="Open Trash">
       <img class="software-dock__trash-icon" src="assets/icons/bin.png" alt="">
     </button>
   </div>
@@ -261,16 +262,31 @@
       <img src="assets/icons/terminal.png" alt="">
     </button>
     <button class="mobile-dock__item mobile-dock__item--paper" type="button" data-mobile-open="cv" aria-label="Open Resume">
-      <img src="assets/icons/txt.png" alt="">
+      <span class="mobile-dock__cv-mark">CV</span>
     </button>
     <button class="mobile-dock__item mobile-dock__item--mail" type="button" data-mobile-open="contact" aria-label="Send an email">
-      <svg viewBox="0 0 16 16" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" aria-hidden="true">
-        <rect x="1.5" y="3.5" width="13" height="9" rx="1.2"/>
-        <path d="M2 4.5l6 5 6-5"/>
-      </svg>
+      <img class="mobile-dock__mail-image" src="assets/icons/mail-new.png" alt="">
     </button>
     <a class="mobile-dock__item mobile-dock__item--linkedin" href="https://www.linkedin.com/in/marion-zimmerl%C3%A9-719217181/" target="_blank" rel="noopener noreferrer" aria-label="View Marion's LinkedIn profile">in</a>
   </nav>
+
+  <!-- Mobile-only iPhone-style tools folder -->
+  <div class="mobile-tools-overlay" id="mobileToolsOverlay" hidden>
+    <div class="mobile-tools-panel" role="dialog" aria-modal="true" aria-label="TOOLS">
+      <div class="mobile-tools-heading">TOOLS <button type="button" id="mobileToolsClose" aria-label="Fermer">×</button></div>
+      <div class="mobile-tools-grid">
+        <div><img src="assets/apps/normalized/photoshop.png" alt=""><span>Photoshop</span></div>
+        <div><img src="assets/apps/normalized/illustrator.png" alt=""><span>Illustrator</span></div>
+        <div><img src="assets/apps/normalized/indesign.png" alt=""><span>InDesign</span></div>
+        <div><img src="assets/apps/normalized/premierepro.png" alt=""><span>Premiere Pro</span></div>
+        <div><img src="assets/apps/normalized/aftereffects.png" alt=""><span>After Effects</span></div>
+        <div><img src="assets/apps/normalized/figma.png" alt=""><span>Figma</span></div>
+        <div><img src="assets/apps/normalized/vscode.png" alt=""><span>VS Code</span></div>
+        <div><img src="assets/apps/normalized/blender.png" alt=""><span>Blender</span></div>
+        <div><img src="assets/apps/normalized/microsoft-365.png" alt=""><span>Microsoft 365</span></div>
+      </div>
+    </div>
+  </div>
 
   <!-- ===================== WINDOW LAYER ===================== -->
   <div id="windowLayer" class="window-layer"></div>
@@ -306,8 +322,8 @@
 
   <!-- ===================== SCRIPTS ===================== -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script src="js/i18n.js?v=7"></script>
-  <script src="js/data.js?v=36"></script>
+  <script src="js/i18n.js?v=8"></script>
+  <script src="js/data.js?v=37"></script>
   <script src="js/utils.js"></script>
   <script src="js/menubar.js?v=8"></script>
   <script src="js/calendar.js?v=1"></script>
@@ -319,7 +335,8 @@
   <script src="js/cv.js?v=6"></script>
   <script src="js/colorlab.js?v=1"></script>
   <script src="js/projects.js?v=11"></script>
-  <script src="js/mobile.js?v=1"></script>
+  <script src="js/mobile.js?v=17"></script>
   <script src="js/main.js"></script>
+<div class="portfolio-signature" aria-label="Crédit de création">Designed &amp; developed by Marion Zimmerlé Izquierdo © 2026</div>
 </body>
 </html>

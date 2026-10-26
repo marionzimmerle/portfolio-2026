@@ -63,3 +63,21 @@
   document.addEventListener("touchend", endSwipe);
   document.addEventListener("touchcancel", endSwipe);
 })();
+
+// Mobile-only tools folder, inserted into the same desktop grid as project icons.
+(() => {
+ const desktop=document.getElementById('desktop');
+ const overlay=document.getElementById('mobileToolsOverlay');
+ if(!desktop||!overlay)return;
+ const launcher=document.createElement('button');
+ launcher.type='button';launcher.className='mobile-tools-launch';launcher.setAttribute('aria-label','Ouvrir le dossier TOOLS');
+ launcher.innerHTML='<span class="mobile-tools-mini">'+[
+ 'photoshop.svg','illustrator.svg','indesign.svg','premierepro.svg','aftereffects.svg','figma.png','vscode.png','blender.webp','microsoft-365.png'
+ ].map(n=>'<img src="assets/apps/'+n+'" alt="">').join('')+'</span><span>TOOLS</span>';
+ desktop.appendChild(launcher);
+ const close=()=>{overlay.hidden=true;};
+ launcher.addEventListener('click',()=>{overlay.hidden=false;});
+ document.getElementById('mobileToolsClose')?.addEventListener('click',close);
+ overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+})();
