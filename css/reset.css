@@ -1,0 +1,80 @@
+/* =========================================================================
+   reset.css — minimal reset + global Aqua theme variables
+   ========================================================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  user-select: none;
+  cursor: default;
+}
+
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: rgba(60, 140, 255, 0.4);
+}
+
+:root {
+  /* ---- Palette Aqua / Y2K ---- */
+  --aqua-blue-1: #1c5fd1;
+  --aqua-blue-2: #4a9dff;
+  --aqua-blue-3: #a9d6ff;
+  --aqua-ice: #eaf5ff;
+  --aqua-graphite-1: #d9dee5;
+  --aqua-graphite-2: #b9c1cc;
+  --aqua-stripe-light: rgba(255, 255, 255, 0.55);
+  --aqua-stripe-dark: rgba(255, 255, 255, 0.15);
+
+  --traffic-red: #ff5f57;
+  --traffic-red-dark: #e0443e;
+  --traffic-yellow: #ffbd2e;
+  --traffic-yellow-dark: #dea123;
+  --traffic-green: #28c840;
+  --traffic-green-dark: #1aab29;
+
+  --text-dark: #16202b;
+  --text-light: #f5f9ff;
+
+  --menubar-height: 26px;
+
+  --radius-window: 10px;
+  --radius-icon: 10px;
+
+  --shadow-window: 0 25px 60px -10px rgba(10, 20, 40, 0.55), 0 4px 12px rgba(10,20,40,0.25);
+  --shadow-icon-label: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+/* Visible focus ring for keyboard accessibility, without breaking the look */
+:focus-visible {
+  outline: 2px solid var(--aqua-blue-2);
+  outline-offset: 2px;
+}

@@ -1,0 +1,315 @@
+/* =========================================================================
+   mobile.css — phone / small-tablet layout (≤ 800px)
+   -------------------------------------------------------------------------
+   The desktop metaphor becomes a phone home screen:
+   - profile widgets on top, then a grid of app icons
+   - a slim bottom dock with quick access (About, Resume, Contact, LinkedIn)
+   - every window opens as a full-screen sheet with a back button;
+     swipe down on its top bar to close it (see js/mobile.js)
+   Loaded last so it overrides the earlier responsive rules.
+   ========================================================================= */
+
+/* Elements that only exist on mobile are hidden everywhere else */
+.mobile-dock { display: none; }
+.intro-widget > .intro-widget__touch { display: none; }
+
+@media (max-width: 800px) {
+
+  /* ---------- Top bar: logo, name, shortcuts, language ---------- */
+  .menubar__menu { display: none; }
+  .menubar__identity + .menubar__menu { margin-left: 0; }
+  .menubar__name {
+    max-width: 44vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ---------- Home screen ---------- */
+  .desktop {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-flow: row;
+    grid-auto-rows: minmax(88px, max-content);
+    align-content: start;
+    gap: 22px 8px;
+    padding: 14px 16px calc(118px + env(safe-area-inset-bottom, 0px));
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Widgets: profile + short hint only (no calendar / languages on mobile) */
+  .desktop-widgets {
+    display: flex !important;
+    position: static;
+    width: auto;
+    grid-column: 1 / -1;
+    gap: 10px;
+    margin-bottom: 8px;
+    z-index: auto;
+  }
+  .clock-calendar-widget,
+  .languages-widget { display: none; }
+
+  .photo-widget,
+  .identity-widget { height: 112px; }
+  .profile-widget__identity strong { font-size: 16px; }
+  .profile-widget__identity span { font-size: 12px; }
+  .identity-widget__availability span { font-size: 11px; line-height: 1.3; }
+
+  .intro-widget { padding: 11px 13px; }
+  .intro-widget .desktop-widget__eyebrow { margin-bottom: 6px; }
+  .intro-widget p:not(.desktop-widget__eyebrow),
+  .intro-widget > span:not(.intro-widget__touch) { display: none; }
+  .intro-widget > .intro-widget__touch {
+    display: block;
+    margin: 0;
+    color: #4d6385;
+    font: 700 11px/1.3 "Courier New", monospace;
+  }
+
+  /* ---------- App icons ---------- */
+  .icon {
+    width: auto;
+    min-height: 88px;
+    padding: 0;
+    gap: 7px;
+    min-width: 0;
+    align-self: start;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    touch-action: manipulation;
+  }
+  .icon__image {
+    width: 64px;
+    height: 64px;
+    border-radius: 15px;
+  }
+  .icon__image--custom {
+    background-color: rgba(255, 255, 255, .42) !important;
+    box-shadow:
+      inset 0 1px rgba(255, 255, 255, .6),
+      0 6px 14px rgba(24, 44, 78, .22) !important;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+  .icon__custom-img { width: 74%; height: 74%; }
+  .icon[data-kind="colorlab"] .icon__custom-img { width: 88%; height: 88%; }
+  .icon__label-text {
+    padding: 0 2px;
+    font-size: 11px;
+    line-height: 1.2;
+    letter-spacing: .01em;
+  }
+
+  /* Projects use their cover as the app icon */
+  .icon[data-id="project-01"] .icon__image,
+  .icon[data-id="project-02"] .icon__image,
+  .icon[data-id="project-03"] .icon__image,
+  .icon[data-id="project-04"] .icon__image {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0 6px 14px rgba(24, 44, 78, .3) !important;
+  }
+  .icon[data-id="project-01"] .icon__image { background-image: url("../assets/projects/evo/evo-01.jpg") !important; background-color: #111 !important; }
+  .icon[data-id="project-02"] .icon__image { background-image: url("../assets/projects/fudgee/fudgee-01.jpg") !important; background-color: #fbf0dc !important; }
+  .icon[data-id="project-03"] .icon__image { background-image: url("../assets/projects/stage-report/stage-01.jpg") !important; background-position: center top !important; background-color: #8db4d6 !important; }
+  .icon[data-id="project-04"] .icon__image { background-image: url("../assets/projects/appart/appart-icon.jpg") !important; background-color: #000 !important; }
+  .icon[data-id^="project-"] .icon__custom-img { display: none; }
+
+  /* No "selected" blue label after a tap: it opens right away */
+  .icon.is-selected .icon__label-text { background: none; box-shadow: none; }
+  .icon.is-selected .icon__image { filter: none; }
+
+  /* ---------- Bottom dock ---------- */
+  .software-dock { display: none; }
+  .mobile-dock {
+    position: fixed;
+    left: 14px;
+    right: 14px;
+    bottom: max(12px, env(safe-area-inset-bottom, 0px));
+    z-index: 90;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 11px 12px;
+    border: .8px solid rgba(255, 255, 255, .5);
+    border-radius: 26px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .52), rgba(255, 255, 255, .3));
+    box-shadow: inset 0 1px rgba(255, 255, 255, .5), 0 10px 24px rgba(34, 56, 84, .2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    backdrop-filter: blur(16px) saturate(1.2);
+  }
+  .mobile-dock__item {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    overflow: hidden;
+    color: #fff;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .12s ease;
+  }
+  .mobile-dock__item:active { transform: scale(.92); }
+  .mobile-dock__item img { width: 100%; height: 100%; object-fit: cover; }
+  .mobile-dock__item--paper img { width: 70%; height: 70%; object-fit: contain; }
+  .mobile-dock__item--paper { background: rgba(255, 255, 255, .55); }
+  .mobile-dock__item--mail { background: linear-gradient(160deg, #5aa8ff, #2a6fd8); }
+  .mobile-dock__item--linkedin { background: linear-gradient(160deg, #2f8fd8, #0a66c2); font: 800 24px/1 Inter, Arial, sans-serif; letter-spacing: -.04em; }
+
+  /* ---------- Windows become full-screen sheets ---------- */
+  .window-layer { top: 0; z-index: 400; }
+  .window {
+    left: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-width: 0;
+    min-height: 0;
+    border-radius: 0;
+    box-shadow: none;
+    animation: sheet-up 260ms cubic-bezier(.2, .9, .25, 1);
+  }
+  .window.is-closing { animation: sheet-down 200ms ease-in forwards; }
+  @keyframes sheet-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  @keyframes sheet-down {
+    from { transform: translateY(var(--drag, 0px)); }
+    to   { transform: translateY(105%); }
+  }
+
+  .window__titlebar {
+    height: 54px;
+    padding: 0 12px;
+    cursor: default;
+    touch-action: none;
+    background: rgba(242, 245, 249, .94);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+  .window:not(.is-active) .window__titlebar { background: rgba(242, 245, 249, .94); color: inherit; }
+  .window:not(.is-active) .window__title { color: var(--text-dark); }
+
+  /* Only one control: a round back button */
+  .window__btn--minimize,
+  .window__btn--maximize { display: none; }
+  .window__traffic { width: 38px; }
+  .window__titlebar-spacer { width: 38px; }
+  .window__btn--close {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    background: rgba(20, 24, 30, .08) !important;
+    box-shadow: none;
+  }
+  .window__btn--close::after {
+    display: block;
+    content: "‹";
+    margin-top: -3px;
+    color: #25282d;
+    font: 400 30px/1 Inter, Arial, sans-serif;
+  }
+  .window__title {
+    padding-right: 0;
+    font-size: 13px;
+  }
+
+  /* The terminal fills the whole sheet */
+  .window[data-id="about-terminal"] .window__content-inner { height: 100%; }
+
+  .window__content-inner {
+    padding: 16px 16px calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Project blocks bleed to the screen edges (matches the 16px padding) */
+  .project-pdf,
+  .project-gallery,
+  .project-longform,
+  .project-magazine { margin-inline: -16px; }
+  .project-gallery { padding-inline: 16px; }
+  .project-case__story { max-width: none; }
+  .project-case h2 { font-size: clamp(26px, 8vw, 36px); }
+}
+
+@media (max-width: 360px) {
+  .icon__image { width: 58px; height: 58px; }
+  .desktop { padding-inline: 12px; gap: 18px 6px; }
+}
+
+/* Large phones in landscape and small tablets: keep the home screen a
+   comfortable phone-width column instead of stretching it. */
+@media (min-width: 561px) and (max-width: 800px) {
+  .desktop { padding-inline: max(16px, calc((100vw - 560px) / 2)); }
+  .mobile-dock {
+    left: 50%;
+    right: auto;
+    width: min(440px, calc(100vw - 28px));
+    transform: translateX(-50%);
+  }
+}
+
+/* Keep phone icons centered in their cells, below the widgets. */
+@media (max-width: 800px) {
+  .desktop > .icon { justify-self: center; text-align: center; width: 100%; max-width: 100px; }
+}
+@media (max-width: 380px) {
+  .desktop { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Mobile: show the complete desktop introduction above the app icons. */
+@media (max-width: 800px) {
+  .desktop .desktop-widgets {
+    display: flex !important;
+    transform: none;
+  }
+  .desktop .intro-widget p:not(.desktop-widget__eyebrow) {
+    display: block;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .desktop .intro-widget > span:not(.intro-widget__touch) {
+    display: none;
+  }
+  .desktop .intro-widget > .intro-widget__touch {
+    display: block;
+    margin-top: 10px;
+  }
+}
+
+/* Mobile-only introduction: replace desktop mouse instructions with touch guidance. */
+@media (min-width: 801px) {
+  .intro-widget__mobile-copy { display: none !important; }
+}
+@media (max-width: 800px) {
+  .desktop .intro-widget > p.intro-widget__mobile-copy { display: block !important; font-size: 12px; line-height: 1.55; }
+  .desktop .intro-widget > p:not(.desktop-widget__eyebrow):not(.intro-widget__mobile-copy) { display: none !important; }
+}
+
+/* Mobile-only project icons — desktop assets and layout unchanged. */
+@media (max-width: 700px) {
+  .icon[data-id="project-01"] .icon__image {
+    background-size: 175% auto !important;
+    background-position: 50% 50% !important;
+  }
+  .icon[data-id="project-02"] .icon__image {
+    background-image: url("../assets/projects/mobile-icons/fudgee-cups.png") !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  .icon[data-id="project-03"] .icon__image {
+    background-size: 165% auto !important;
+    background-position: center top !important;
+  }
+  .icon[data-id="project-04"] .icon__image {
+    background-image: url("../assets/projects/mobile-icons/appart-a.png") !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+}

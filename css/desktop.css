@@ -1,0 +1,68 @@
+/* =========================================================================
+   desktop.css — the wallpaper and the desktop area
+   -------------------------------------------------------------------------
+   To change the wallpaper: just replace the "background" of .desktop
+   below with an image:
+     background: url("../assets/wallpaper.jpg") center / cover no-repeat;
+   ========================================================================= */
+
+body {
+  background: url("../assets/fond.jpg") center / cover no-repeat fixed;
+}
+
+.desktop {
+  position: fixed;
+  top: var(--menubar-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Subtle vignette to give the desktop some depth, Aqua-style */
+.desktop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.15), transparent 60%);
+}
+
+/* The layer where windows live floats above the desktop */
+.window-layer {
+  position: fixed;
+  top: var(--menubar-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none; /* windows themselves re-enable pointer events */
+  z-index: 100;
+}
+
+.window-layer > .window {
+  pointer-events: auto;
+}
+
+@media (max-width: 800px) {
+  .desktop {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+    grid-auto-rows: 104px;
+    align-content: start;
+    gap: 8px 4px;
+    padding: 18px 10px 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .desktop {
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+    grid-auto-rows: 96px;
+    gap: 6px 2px;
+    padding-inline: 8px;
+  }
+}

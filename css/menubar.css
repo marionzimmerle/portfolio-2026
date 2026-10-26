@@ -1,0 +1,516 @@
+/* =========================================================================
+   menubar.css — top menu bar, styled to sit close to the real macOS one:
+   logo on the far left, your name where the bold app name normally sits,
+   decorative menus, a search glyph and the clock on the far right, in the
+   same relative positions as on an actual Mac.
+   ========================================================================= */
+
+.menubar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--menubar-height);
+  z-index: 300;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dark);
+
+  background: linear-gradient(
+    180deg,
+    rgba(244, 247, 251, .74),
+    rgba(230, 236, 244, .60)
+  );
+  backdrop-filter: blur(12px) saturate(1.18);
+  -webkit-backdrop-filter: blur(12px) saturate(1.18);
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.34) inset, 0 2px 6px rgba(0,0,0,0.10);
+}
+
+.menubar__left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 100%;
+  min-width: 0; /* allows the name to ellipsis instead of pushing menus off */
+}
+
+/* ---- Portfolio logo -------------------------------------------------- */
+.menubar__logo {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background-color: transparent;
+  background-image: url("../assets/favicon.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ---- Name, positioned on the right between the clock and search,
+   same relative spot as the fast-user-switching name on macOS ---- */
+.menubar__name {
+  display: block;
+  padding: 4px 6px;
+  margin-left: -6px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 34vw;
+}
+
+.menubar__name:hover,
+.menubar__name[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.menubar__identity {
+  position: relative;
+  min-width: 0;
+}
+
+.menubar__menu {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.menubar__menu-button {
+  padding: 4px 7px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+  cursor: default;
+}
+
+.menubar__menu-button:hover,
+.menubar__menu-button[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.menubar__menu-button:focus-visible {
+  outline: 2px solid rgba(52, 120, 212, 0.65);
+  outline-offset: 1px;
+}
+
+.menubar__dropdown--file {
+  left: -3px;
+  width: 184px;
+}
+
+.menubar__menu-separator {
+  height: 1px;
+  margin: 4px 6px;
+  background: rgba(52, 65, 82, 0.16);
+}
+
+.menubar__dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: -7px;
+  width: 176px;
+  padding: 5px;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 8px;
+  background: rgba(237, 242, 249, 0.918);
+  box-shadow: 0 12px 30px rgba(25, 44, 70, .25), inset 0 1px rgba(255,255,255,.8);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+}
+
+.menubar__dropdown button {
+  width: 100%;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #26374c;
+  text-align: left;
+  font: 500 13px/1.2 inherit;
+}
+
+.menubar__dropdown button:hover,
+.menubar__dropdown button:focus-visible {
+  color: white;
+  background: #3478d4;
+  outline: none;
+}
+
+.menubar__menus {
+  display: flex;
+  gap: 16px;
+  opacity: 0.55;
+  white-space: nowrap;
+}
+
+.menubar__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  color: var(--text-dark);
+}
+
+/* ---- Status icons (Wi-Fi, volume...), same slot as macOS' menu extras */
+.menubar__status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 1;
+}
+
+.menubar__icon {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  color: inherit;
+  opacity: 0.75;
+}
+
+.menubar__volume {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.menubar__volume-button {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: inherit;
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.menubar__volume-button:hover,
+.menubar__volume-button[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.38);
+  opacity: 1;
+}
+
+.menubar__volume-button:focus-visible {
+  outline: 2px solid rgba(52, 120, 212, 0.7);
+  outline-offset: 1px;
+}
+
+.menubar__volume-button .volume-muted-mark {
+  display: none;
+}
+
+.menubar__volume-button[data-level="low"] .volume-wave--2 {
+  display: none;
+}
+
+.menubar__volume-button[data-level="mute"] .volume-wave {
+  display: none;
+}
+
+.menubar__volume-button[data-level="mute"] .volume-muted-mark {
+  display: block;
+}
+
+.menubar__volume-popover {
+  position: absolute;
+  top: calc(100% + 7px);
+  right: -66px;
+  width: 184px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 12px;
+  background: rgba(241, 245, 250, 0.78);
+  box-shadow:
+    0 12px 30px rgba(25, 44, 70, 0.22),
+    inset 0 1px rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+}
+
+.menubar__volume-panel {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 3px 4px;
+}
+
+.menubar__volume-panel-icon {
+  flex: 0 0 auto;
+  color: #4d5661;
+  opacity: 0.9;
+}
+
+.menubar__volume-slider {
+  --volume-value: 72%;
+  width: 100%;
+  min-width: 0;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menubar__volume-slider::-webkit-slider-runnable-track {
+  height: 5px;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      to right,
+      rgba(77, 86, 97, 0.88) 0,
+      rgba(77, 86, 97, 0.88) var(--volume-value),
+      rgba(117, 127, 139, 0.22) var(--volume-value),
+      rgba(117, 127, 139, 0.22) 100%
+    );
+}
+
+.menubar__volume-slider::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  margin-top: -4.5px;
+  border: 0;
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: #fff;
+  box-shadow:
+    0 1px 4px rgba(24, 35, 50, 0.32),
+    0 0 0 0.5px rgba(0, 0, 0, 0.13);
+}
+
+.menubar__volume-slider::-moz-range-track {
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(117, 127, 139, 0.22);
+}
+
+.menubar__volume-slider::-moz-range-progress {
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(77, 86, 97, 0.88);
+}
+
+.menubar__volume-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 1px 4px rgba(24, 35, 50, 0.32),
+    0 0 0 0.5px rgba(0, 0, 0, 0.13);
+}
+
+/* ---- Search glyph, same spot as Spotlight on macOS: right side,
+   just left of the mail icon ---- */
+.menubar__search {
+  display: flex;
+  align-items: center;
+  opacity: 0.75;
+  color: inherit;
+}
+
+.menubar__search:hover {
+  opacity: 1;
+}
+
+/* ---- Mail icon, at the very right edge (in place of macOS' Notification
+   Center icon). Point its href (in index.html) at your own mailto: link. */
+.menubar__mail {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  color: inherit;
+  opacity: 0.75;
+  text-decoration: none;
+}
+
+.menubar__mail:hover {
+  opacity: 1;
+}
+
+.menubar__linkedin {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  color: inherit;
+  opacity: 0.75;
+  text-decoration: none;
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.menubar__linkedin:visited,
+.menubar__linkedin:hover,
+.menubar__linkedin:focus {
+  text-decoration: none;
+}
+
+.menubar__linkedin-text {
+  display: block;
+  color: currentColor;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 15px;
+  letter-spacing: -1.05px;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.menubar__linkedin:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+
+/* Uniform sizing/alignment for right-side menu bar icons */
+.menubar__mail svg,
+.menubar__icon svg,
+.menubar__volume-button > svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  flex: 0 0 14px;
+}
+
+/* ---- Clock, kept in the same relative spot as on macOS ---- */
+.menubar__clock {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 700px) {
+  .menubar { padding: 0 8px; }
+  .menubar__left { gap: 9px; }
+  .menubar__right { gap: 9px; }
+  .menubar__name { max-width: 38vw; font-size: 12px; }
+  .menubar__status,
+  .menubar__search { display: none; }
+  .menubar__clock { font-size: 11px; }
+}
+
+@media (max-width: 420px) {
+  .menubar__clock { display: none; }
+  .menubar__name { max-width: 55vw; }
+}
+
+.menubar__identity + .menubar__menu {
+  margin-left: -8px;
+}
+
+
+.menubar__dropdown--help {
+  left: -3px;
+  width: 168px;
+}
+
+
+/* ---- Language selector ------------------------------------------------ */
+.menubar__language {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.menubar__language-button {
+  min-width: 30px;
+  height: 22px;
+  padding: 0 6px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: inherit;
+  font: 600 11px/1 "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: .03em;
+  cursor: pointer;
+  transform: translateY(1px);
+}
+
+.menubar__language-button:hover,
+.menubar__language-button[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.menubar__language-button:focus-visible {
+  outline: 2px solid rgba(52, 120, 212, 0.68);
+  outline-offset: 1px;
+}
+
+.menubar__language-menu {
+  position: absolute;
+  top: calc(100% + 7px);
+  right: -5px;
+  width: 132px;
+  padding: 5px;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 8px;
+  background: rgba(237, 242, 249, .84);
+  box-shadow: 0 12px 30px rgba(25, 44, 70, .24), inset 0 1px rgba(255,255,255,.8);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+}
+
+.menubar__language-menu button {
+  position: relative;
+  width: 100%;
+  padding: 7px 26px 7px 10px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #26374c;
+  text-align: left;
+  font: 500 12.5px/1.2 "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  cursor: pointer;
+}
+
+.menubar__language-menu button[aria-checked="true"]::after {
+  content: "✓";
+  position: absolute;
+  right: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 700;
+}
+
+.menubar__language-menu button:hover,
+.menubar__language-menu button:focus-visible {
+  color: #fff;
+  background: #3478d4;
+  outline: none;
+}
+
+@media (max-width: 700px) {
+  .menubar__language-button {
+    min-width: 28px;
+    padding: 0 5px;
+  }
+}

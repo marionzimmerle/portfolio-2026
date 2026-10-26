@@ -1,0 +1,276 @@
+/* =========================================================================
+   dock.css — decorative software dock
+   ========================================================================= */
+
+.software-dock {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  z-index: 90;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 0.8px solid rgba(255,255,255,.42);
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.46),
+      rgba(255,255,255,.28)
+    );
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.45),
+    inset 0 -1px rgba(255,255,255,.06),
+    0 8px 20px rgba(34,56,84,.12);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+}
+
+.software-dock__item {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  cursor: default;
+  transform-origin: center bottom;
+  transition: transform 180ms cubic-bezier(.2,.8,.2,1), margin 180ms ease;
+}
+
+button.software-dock__item {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.software-dock__item--interactive {
+  cursor: pointer;
+}
+
+.software-dock__icon--terminal {
+  width: 118%;
+  height: 118%;
+  object-fit: contain;
+  max-width: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.software-dock__icon-frame--terminal {
+  overflow: hidden;
+}
+
+.software-dock__icon--microsoft-img {
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.software-dock__icon--plain {
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+  object-fit: contain;
+}
+
+
+.software-dock__item:hover {
+  z-index: 2;
+  margin: 0 7px;
+  transform: translateY(-8px) scale(1.35);
+}
+
+.software-dock__item::after {
+  content: attr(data-name);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 11px);
+  transform: translate(-50%, 5px) scale(.74);
+  transform-origin: center bottom;
+
+  padding: 7px 11px;
+  border: 1px solid rgba(255, 255, 255, .44);
+  border-radius: 999px;
+
+  color: rgba(255, 255, 255, .96);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .34),
+      rgba(255, 255, 255, .18)
+    );
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .45),
+    inset 0 -1px rgba(255, 255, 255, .06),
+    0 8px 20px rgba(34, 56, 84, .18);
+
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+
+  text-shadow: 0 1px 1px rgba(50, 70, 98, .22);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: .02em;
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 130ms ease,
+    transform 130ms ease,
+    visibility 130ms;
+}
+
+.software-dock__item:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0) scale(.74);
+}
+
+.software-dock__icon {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 11px;
+  font: 700 20px/1 "Segoe UI", Arial, sans-serif;
+  box-shadow: 0 3px 8px rgba(10,20,40,.3), inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+/* Some downloaded logos include transparent padding inside their files.
+   This frame crops that padding so each logo fills its dock square. */
+.software-dock__icon-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 11px;
+  box-shadow: none;
+}
+
+.software-dock__icon-frame .software-dock__icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  max-width: none;
+  box-shadow: none;
+  transform: translate(-50%, -50%);
+}
+
+.software-dock__icon--figma-img { width: 167%; height: 167%; }
+.software-dock__icon--vscode-img { width: 126%; height: 126%; }
+.software-dock__icon--blender-img { width: 128%; height: 128%; }
+
+
+
+
+.software-dock__separator {
+  width: 1px;
+  height: 34px;
+  margin: 0 3px;
+  align-self: center;
+  background: rgba(35, 55, 75, .22);
+  box-shadow: 1px 0 rgba(255,255,255,.35);
+}
+
+.software-dock__item--trash {
+  display: grid;
+  place-items: center;
+}
+
+.software-dock__trash-icon {
+  width: 43px;
+  height: 43px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+@media (max-width: 620px) {
+  .software-dock { gap: 4px; padding: 7px 8px; max-width: calc(100vw - 16px); }
+  .software-dock__item { width: 36px; height: 36px; flex-basis: 36px; }
+  .software-dock__icon { border-radius: 8px; font-size: 16px; }
+  .software-dock__icon-frame { border-radius: 8px; }
+  .software-dock__item:hover { margin: 0 3px; transform: translateY(-6px) scale(1.22); }
+  .software-dock__icon--microsoft { grid-template-columns: repeat(2, 10px); grid-template-rows: repeat(2, 10px); gap: 2px; }
+  .software-dock__icon--microsoft i { width: 10px; height: 10px; }
+  .software-dock__separator { height: 28px; margin: 0 1px; }
+  .software-dock__trash-icon { width: 35px; height: 35px; }
+}
+
+@media (max-width: 460px) {
+  .software-dock {
+    bottom: 8px;
+    gap: 2px;
+    padding: 6px;
+    border-radius: 14px;
+  }
+  .software-dock__item { width: 29px; height: 29px; flex-basis: 29px; }
+  .software-dock__icon { border-radius: 7px; font-size: 13px; }
+  .software-dock__icon-frame { border-radius: 7px; }
+  .software-dock__icon--vscode { font-size: 10px; }
+  .software-dock__icon--blender { font-size: 16px; }
+  .software-dock__item:hover { margin: 0 1px; transform: translateY(-4px) scale(1.12); }
+  .software-dock__icon--microsoft { grid-template-columns: repeat(2, 8px); grid-template-rows: repeat(2, 8px); gap: 2px; }
+  .software-dock__icon--microsoft i { width: 8px; height: 8px; }
+  .software-dock__separator { height: 23px; margin: 0; }
+  .software-dock__trash-icon { width: 29px; height: 29px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .software-dock__item { transition: none; }
+}
+
+
+/* ===== Final dock icon sizing fixes =====
+   Terminal and Microsoft use standalone classes so they are not affected by
+   the generic .software-dock__icon tile styling. */
+.software-dock__icon-frame--terminal {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 11px;
+  box-shadow: none;
+}
+
+.software-dock__terminal-img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 120%;
+  height: 120%;
+  max-width: none;
+  display: block;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.software-dock__microsoft-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  filter: none;
+  overflow: visible;
+  pointer-events: none;
+}
+
+@media (max-width: 620px) {
+  .software-dock__icon-frame--terminal { border-radius: 8px; }
+}
+
+@media (max-width: 460px) {
+  .software-dock__icon-frame--terminal { border-radius: 7px; }
+}

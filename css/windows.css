@@ -1,0 +1,202 @@
+/* =========================================================================
+   windows.css — Aqua-style windows: gloss, transparency, shadows
+   ========================================================================= */
+
+.window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  min-width: 280px;
+  min-height: 180px;
+  border-radius: var(--radius-window);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: var(--shadow-window), 0 0 0 1px rgba(255,255,255,0.6);
+  transform-origin: var(--origin-x, 50%) var(--origin-y, 50%);
+  animation: window-open 180ms cubic-bezier(.2,.9,.3,1.2);
+}
+
+@keyframes window-open {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.window.is-closing {
+  animation: window-close 140ms ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes window-close {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.85); }
+}
+
+.window.is-minimized {
+  animation: window-minimize 220ms ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes window-minimize {
+  from { opacity: 1; transform: scale(1) translateY(0); }
+  to   { opacity: 0; transform: scale(0.2) translateY(300px); }
+}
+
+.window.is-restoring {
+  animation: window-restore 220ms ease-out;
+}
+
+@keyframes window-restore {
+  from { opacity: 0; transform: scale(0.2) translateY(300px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.window.is-active {
+  box-shadow: var(--shadow-window), 0 0 0 1px rgba(255,255,255,0.8);
+}
+
+.window.is-maximized {
+  border-radius: 0;
+}
+
+/* ---- Barre de titre ---- */
+.window__titlebar {
+  height: 30px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 8px;
+  cursor: grab;
+  background: #e8edf4;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
+}
+
+.window:not(.is-active) .window__titlebar {
+  background: #f0f2f5;
+  color: #9aa0a8;
+}
+
+.window__titlebar:active {
+  cursor: grabbing;
+}
+
+.window__traffic {
+  display: flex;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.window__btn {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.10);
+}
+
+.window__btn::after {
+  display: none;
+}
+
+.window__btn--close    { background: #ff6159; }
+.window__btn--minimize { background: #ffbd2e; }
+.window__btn--maximize { background: #28c941; }
+
+.window:not(.is-active) .window__btn--close,
+.window:not(.is-active) .window__btn--minimize,
+.window:not(.is-active) .window__btn--maximize {
+  background: linear-gradient(160deg, #dfe2e6 0%, #c7cbd1 100%);
+}
+
+.window__title {
+  flex: 1;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 45px; /* visually balances the buttons on the left */
+}
+
+.window:not(.is-active) .window__title {
+  color: #9aa0a8;
+}
+
+.window__titlebar-spacer {
+  width: 45px;
+  flex: 0 0 auto;
+}
+
+/* ---- Contenu ---- */
+.window__content {
+  flex: 1 1 auto;
+  overflow: auto;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(245,248,252,0.9));
+}
+
+.window__content-inner {
+  min-height: 100%;
+  padding: 24px;
+}
+
+/* Generic placeholder content (PROJECT/ABOUT/CV/CONTACT/ARCHIVES) */
+.placeholder-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 100%;
+  color: #7a8492;
+}
+
+.placeholder-content__tag {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #9aa4b2;
+}
+
+.placeholder-content__empty {
+  width: 100%;
+  min-height: 180px;
+  border: 1.5px dashed #c7cfda;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.4);
+}
+
+/* ---- Resize handle ---- */
+.window__resize-handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 18px;
+  height: 18px;
+  cursor: nwse-resize;
+  background:
+    linear-gradient(135deg, transparent 0 50%, rgba(0,0,0,0.18) 50% 58%, transparent 58% 66%, rgba(0,0,0,0.18) 66% 74%, transparent 74%);
+}
+
+.window.is-maximized .window__resize-handle {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .window {
+    left: 10px !important;
+    top: 10px !important;
+    width: calc(100vw - 20px) !important;
+    height: calc(100vh - var(--menubar-height) - 105px) !important;
+    min-width: 0;
+    min-height: 220px;
+    max-width: none;
+  }
+
+  .window__content-inner { padding: 16px; }
+  .window__resize-handle { display: none; }
+}

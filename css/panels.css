@@ -1,0 +1,543 @@
+.terminal-about {
+  min-height: 100%;
+  padding: 22px;
+  color: #e5edf4;
+  background: radial-gradient(circle at 25% 0, #283440 0, #111820 58%, #090d12 100%);
+  font: 14px/1.65 "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.terminal-about p { margin: 0 0 14px; }
+.terminal-about__prompt { color: #83dca6; }
+.terminal-about__path { color: #79b8ff; }
+.terminal-about__answer { color: #f2f6f8; }
+.terminal-about__cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  vertical-align: -3px;
+  background: #dbe6ed;
+  animation: terminal-cursor 1s steps(1) infinite;
+}
+
+@keyframes terminal-cursor { 50% { opacity: 0; } }
+
+.trash-window {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #657386;
+  text-align: center;
+}
+
+.trash-window img {
+  width: 78px;
+  height: 78px;
+  margin-bottom: 6px;
+  object-fit: contain;
+}
+
+.trash-window strong { color: #34465c; font-size: 15px; }
+.trash-window span { font-size: 12px; }
+
+.contact-panel {
+  min-height: 100%;
+  height: 100%;
+  color: #26374c;
+  background: #fbfaf8;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.contact-form__heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 22px;
+  border-bottom: 1px solid #e4e1dd;
+  color: #2c3035;
+  font-size: 14px;
+}
+
+.contact-form__envelope { color: #777b7f; font-size: 16px; }
+
+.contact-form__row {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0;
+  padding: 0 22px;
+  border-bottom: 1px solid #e9e6e2;
+  font-size: 13px;
+}
+
+.contact-form__label {
+  width: 66px;
+  flex: 0 0 66px;
+  color: #9b9a96;
+}
+
+.contact-form__recipient {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 11px;
+  border-radius: 15px;
+  color: #3b3b3a;
+  background: #ece9e4;
+}
+
+.contact-form input {
+  width: 100%;
+  border: 0;
+  padding: 10px 0;
+  color: #20344b;
+  background: transparent;
+  font: 13px/1.4 inherit;
+  outline: none;
+}
+
+.contact-form__message {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  padding: 20px 22px;
+  border: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  outline: none;
+  color: #26374c;
+  background: transparent;
+  font: 14px/1.55 inherit;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.contact-form__message::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.contact-form__message:empty::before {
+  content: attr(data-placeholder);
+  color: #9b9a96;
+  pointer-events: none;
+}
+
+.contact-form__message a {
+  color: #2f69a6;
+  text-decoration: underline;
+}
+
+
+.contact-form__tools {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-top: 1px solid #e9e6e2;
+  color: #676b70;
+}
+
+.contact-form__tool {
+  display: grid;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 7px;
+  place-items: center;
+  border: 0;
+  border-radius: 6px;
+  color: #676b70;
+  background: #f0efec;
+  font: 600 12px/1 inherit;
+  cursor: pointer;
+}
+
+.contact-form__tool:hover {
+  background: #e7e5e1;
+}
+
+.contact-form__tool.is-active {
+  color: #fff;
+  background: #656a70;
+}
+
+.contact-form__tool--symbol {
+  min-width: 32px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: #555d66;
+  background: #eeedea;
+}
+
+.contact-form__tool--symbol:hover {
+  color: #2f353b;
+  background: #e3e1dd;
+}
+
+.contact-form__tool--symbol svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact-form__tool--link svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.15;
+}
+
+.contact-form__tool--symbol .contact-form__emoji-eye {
+  fill: currentColor;
+  stroke: none;
+}
+
+.contact-form__emoji-wrap svg{
+  position: relative;
+  stroke-width: 1.5;
+}
+
+.contact-form__emoji-picker {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 9px);
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(6, 36px);
+  gap: 3px;
+  width: 244px;
+  max-height: 190px;
+  padding: 9px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  border: 1px solid rgba(0,0,0,.10);
+  border-radius: 12px;
+  background: rgba(250,249,247,.985);
+  box-shadow: 0 10px 28px rgba(35,40,48,.20);
+}
+
+.contact-form__emoji-picker::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.contact-form__emoji-picker[hidden] { display: none; }
+
+.contact-form__emoji-picker button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  font-size: 21px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.contact-form__emoji-picker button:hover {
+  background: #ebe8e4;
+}
+
+
+.contact-form__footer {
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 8px 16px 8px 22px;
+  border-top: 1px solid #e4e1dd;
+  background: #f4f2ef;
+}
+.contact-form__status { min-height: 16px; margin: 0; font-size: 11px; color: #53677f; }
+.contact-form__submit {
+  margin-left: auto;
+  padding: 9px 20px;
+  border: 0;
+  border-radius: 18px;
+  color: white;
+  background: #2d302f;
+  box-shadow: none;
+  font-weight: 700;
+}
+.contact-form__submit:hover { background: #161817; }
+.contact-form__submit:disabled {
+  cursor: wait;
+  opacity: .62;
+}
+
+.window[data-id="about-terminal"] .window__content,
+.window[data-id="about-terminal"] .window__content-inner,
+.window[data-id="contact-mail"] .window__content,
+.window[data-id="contact-mail"] .window__content-inner { padding: 0; }
+
+.window[data-id="contact-mail"] .window__content,
+.window[data-id="contact-mail"] .window__content-inner {
+  height: 100%;
+  overflow: hidden;
+}
+
+.window[data-id="contact-mail"] .contact-panel {
+  overflow: hidden;
+}
+
+@media (max-width: 520px) {
+  .contact-form__heading,
+  .contact-form__row { padding-left: 14px; padding-right: 14px; }
+  .contact-form__label { width: 50px; flex-basis: 50px; }
+  .contact-form__recipient { font-size: 12px; }
+  .contact-form__message { padding: 16px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal-about__cursor { animation: none; }
+}
+
+
+/* =========================================================================
+   Help panel
+   ========================================================================= */
+.help-panel {
+  min-height: 100%;
+  height: 100%;
+  padding: 24px 26px;
+  color: #30363d;
+  background: #fbfaf8;
+}
+
+.help-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #e6e3df;
+}
+
+.help-panel__icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  flex: 0 0 42px;
+  place-items: center;
+  border: 1px solid rgba(62, 70, 79, .13);
+  border-radius: 12px;
+  color: #4f5862;
+  background: #efeeeb;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.help-panel__header div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.help-panel__header strong {
+  color: #2d3339;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.help-panel__header span:not(.help-panel__icon) {
+  color: #85898e;
+  font-size: 12px;
+}
+
+.help-panel__list {
+  display: grid;
+  gap: 2px;
+  padding-top: 12px;
+}
+
+.help-panel__item {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  min-height: 58px;
+  padding: 7px 8px;
+  border-radius: 10px;
+}
+
+.help-panel__item:hover {
+  background: rgba(89, 100, 113, .055);
+}
+
+.help-panel__symbol {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #626a73;
+  background: #f0efec;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.help-panel__item div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.help-panel__item strong {
+  color: #343a40;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.help-panel__item div > span {
+  color: #7e8389;
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+
+/* Keyboard shortcuts help panel */
+.shortcut-list {
+  display: grid;
+  gap: 2px;
+  padding-top: 14px;
+}
+
+.shortcut-row {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 7px 8px;
+  border-radius: 10px;
+  color: #343a40;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.shortcut-row:hover {
+  background: rgba(89, 100, 113, .055);
+}
+
+.shortcut-row--fullscreen {
+  min-height: 68px;
+}
+
+.shortcut-platforms {
+  display: grid;
+  gap: 7px;
+}
+
+.shortcut-platform {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.shortcut-platform > span {
+  min-width: 54px;
+  color: #777e86;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: right;
+}
+
+.shortcut-keys {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.shortcut-keys kbd {
+  min-width: 27px;
+  height: 25px;
+  padding: 0 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(65, 72, 80, .17);
+  border-bottom-color: rgba(65, 72, 80, .28);
+  border-radius: 6px;
+  color: #5b626a;
+  background: #f3f2ef;
+  box-shadow: inset 0 1px rgba(255,255,255,.85), 0 1px 1px rgba(30,40,50,.08);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+
+/* Help windows: fit all content directly, without scrollbars */
+.window[data-id="help-navigation"] .window__content,
+.window[data-id="help-shortcuts"] .window__content {
+  overflow: hidden;
+}
+
+.window[data-id="help-navigation"] .window__content-inner,
+.window[data-id="help-shortcuts"] .window__content-inner {
+  min-height: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.window[data-id="help-navigation"] .help-panel,
+.window[data-id="help-shortcuts"] .help-panel {
+  min-height: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+
+/* Portfolio mark inside Help */
+.help-panel__icon--brand {
+  color: #626a73;
+}
+
+.help-panel__brand-mark {
+  width: 20px;
+  height: 20px;
+  display: block;
+  background: currentColor;
+  -webkit-mask: url("../assets/favicon.svg") center / contain no-repeat;
+  mask: url("../assets/favicon.svg") center / contain no-repeat;
+}
+
+
+.help-panel__symbol--brand {
+  color: #626a73;
+}
+
+.help-panel__brand-mark--small {
+  width: 15px;
+  height: 15px;
+}
