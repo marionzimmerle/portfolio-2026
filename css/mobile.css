@@ -93,6 +93,7 @@
   .intro-widget {
     box-sizing: border-box;
     height: auto;
+    min-height: 160px;
     padding: 11px 13px;
   }
   .intro-widget .desktop-widget__eyebrow { margin-bottom: 6px; }
