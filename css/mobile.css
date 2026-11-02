@@ -93,7 +93,6 @@
   .intro-widget {
     box-sizing: border-box;
     height: auto;
-    min-height: 160px;
     padding: 11px 13px;
   }
   .intro-widget .desktop-widget__eyebrow { margin-bottom: 6px; }
@@ -149,9 +148,10 @@
     height: 100%;
   }
 
-  /* Keep the first app row exclusively for the four projects. Font Book is
-     deliberately the final icon in the phone grid. */
-  .icon[data-kind="fontbook"] { order: 99; }
+  /* Palette and Font Book stay available on desktop but are removed from the
+     more compact phone home screen. */
+  .icon[data-kind="colorlab"],
+  .icon[data-kind="fontbook"] { display: none !important; }
   .icon__label-text {
     padding: 0 2px;
     font-size: 11px;
@@ -185,7 +185,7 @@
     position: fixed;
     left: 14px;
     right: 14px;
-    bottom: max(12px, env(safe-area-inset-bottom, 0px));
+    bottom: max(27px, env(safe-area-inset-bottom, 0px));
     z-index: 90;
     display: flex;
     justify-content: space-around;
@@ -376,7 +376,7 @@
  .mobile-dock__item img.mobile-dock__mail-image {display:block; width:82%;height:82%;object-fit:contain; transform:translateX(-4px);margin:0; flex-shrink:0;}
  .icon[data-id="cv"] {display:none!important;}
  .icon[data-id="project-01"] {order:1;}.icon[data-id="project-02"] {order:2;}.icon[data-id="project-03"] {order:3;}.icon[data-id="project-04"] {order:4;}
- .icon[data-id="play"] {order:6;}.icon[data-id="color-lab"] {order:7;}.icon[data-id="archives"] {order:8;}
+ .icon[data-id="play"] {order:6;}.icon[data-kind="experiments"] {order:7;}.icon[data-id="archives"] {order:8;}
  .mobile-tools-launch {order:5; display:flex; flex-direction:column; align-items:center;gap:7px; width:100%;border:0;background:none;color:#262637;font:inherit;cursor:pointer;}
  .mobile-tools-mini {box-sizing:border-box;width:64px;height:64px;border-radius:15px;background:#ffffff77;backdrop-filter:blur(8px);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px;padding:9px;box-shadow:0 6px 14px #182c4e30;}
  .mobile-tools-mini img {width:100%;height:100%;object-fit:contain;}
