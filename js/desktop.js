@@ -10,6 +10,10 @@ const Desktop = (() => {
 
   const desktopEl = document.getElementById("desktop");
   const tplIcon = document.getElementById("tpl-icon");
+  const projectsCluster = desktopEl.querySelector(".projects-cluster");
+  const projectsWidget = desktopEl.querySelector(".projects-widget");
+  const projectsWidgetGrid = desktopEl.querySelector("[data-projects-widget-grid]");
+  const contactWidget = desktopEl.querySelector(".contact-widget");
 
   let positions = {};
   let touchPositions = {};
@@ -38,6 +42,8 @@ const Desktop = (() => {
     };
 
     DESKTOP_ITEMS.forEach(renderIcon);
+    syncProjectCompartment();
+    bindWidgetDrag();
     layoutIconsForViewport();
 
     // Click on the desktop (outside any icon) = clear selection
@@ -55,6 +61,162 @@ const Desktop = (() => {
         layoutIconsForViewport();
       });
     });
+  }
+
+  /** Every glass card can be moved independently on desktop. Interactive
+   * controls keep their normal click behavior, and mobile remains fixed. */
+  function bindWidgetDrag() {
+    const widgets = [...desktopEl.querySelectorAll(".desktop-widget")];
+    let topLayer = 50;
+
+    widgets.forEach((widget) => {
+      let pointerId = null;
+      let startX = 0;
+      let startY = 0;
+      let originX = 0;
+      let originY = 0;
+      let baseLeft = 0;
+      let baseTop = 0;
+      let layer = null;
+
+      widget.addEventListener("pointerdown", (event) => {
+        const interactiveTarget = event.target.closest(
+          "button, a, input, select, textarea, [contenteditable], .icon"
+        );
+        if (usesResponsiveGrid() || event.button !== 0 || interactiveTarget) return;
+
+        const desktopRect = desktopEl.getBoundingClientRect();
+        const widgetRect = widget.getBoundingClientRect();
+        pointerId = event.pointerId;
+        startX = event.clientX;
+        startY = event.clientY;
+        originX = Number(widget.dataset.widgetX || 0);
+        originY = Number(widget.dataset.widgetY || 0);
+        baseLeft = widgetRect.left - desktopRect.left - originX;
+        baseTop = widgetRect.top - desktopRect.top - originY;
+
+        layer = widget.closest(".desktop-widgets, .projects-cluster") || widget;
+        layer.style.zIndex = String(++topLayer);
+        widget.style.zIndex = String(topLayer + 1);
+        widget.setPointerCapture?.(pointerId);
+        widget.classList.add("is-widget-dragging");
+        event.preventDefault();
+      });
+
+      widget.addEventListener("pointermove", (event) => {
+        if (event.pointerId !== pointerId) return;
+
+        const desktopRect = desktopEl.getBoundingClientRect();
+        const widgetRect = widget.getBoundingClientRect();
+        const bottomClearance = 76;
+        const minX = 8 - baseLeft;
+        const minY = 8 - baseTop;
+        const maxX = desktopRect.width - baseLeft - widgetRect.width - 8;
+        const maxY = desktopRect.height - baseTop - widgetRect.height - bottomClearance;
+        const nextX = Utils.clamp(originX + event.clientX - startX, minX, Math.max(minX, maxX));
+        const nextY = Utils.clamp(originY + event.clientY - startY, minY, Math.max(minY, maxY));
+
+        widget.dataset.widgetX = String(nextX);
+        widget.dataset.widgetY = String(nextY);
+        widget.style.setProperty("--widget-x", `${nextX}px`);
+        widget.style.setProperty("--widget-y", `${nextY}px`);
+        event.preventDefault();
+      });
+
+      function finishWidgetDrag(event) {
+        if (event.pointerId !== pointerId) return;
+        widget.releasePointerCapture?.(pointerId);
+        widget.classList.remove("is-widget-dragging");
+        pointerId = null;
+        layer = null;
+      }
+
+      widget.addEventListener("pointerup", finishWidgetDrag);
+      widget.addEventListener("pointercancel", finishWidgetDrag);
+    });
+  }
+
+  /** On desktop the four folders live inside the movable compartment. On
+   * mobile every icon is restored as a direct desktop child in its original
+   * order, so the existing phone layout stays exactly the same. */
+  function syncProjectCompartment() {
+    if (!projectsWidgetGrid) return;
+
+    if (usesResponsiveGrid()) {
+      DESKTOP_ITEMS.forEach((item) => {
+        if (item.__el) desktopEl.appendChild(item.__el);
+      });
+      return;
+    }
+
+    DESKTOP_ITEMS
+      .filter((item) => item.kind === "project" && item.__el)
+      .forEach((item) => projectsWidgetGrid.appendChild(item.__el));
+  }
+
+  function keepProjectsWidgetVisible() {
+    if (!projectsCluster || usesResponsiveGrid()) return;
+
+    const desktopRect = desktopEl.getBoundingClientRect();
+    const widgetRect = projectsCluster.getBoundingClientRect();
+    const currentLeft = widgetRect.left - desktopRect.left;
+    const currentTop = widgetRect.top - desktopRect.top;
+    const maxLeft = Math.max(8, desktopRect.width - widgetRect.width - 8);
+    const maxTop = Math.max(8, desktopRect.height - widgetRect.height - 82);
+    const nextLeft = Utils.clamp(currentLeft, 8, maxLeft);
+    const nextTop = Utils.clamp(currentTop, 8, maxTop);
+
+    if (nextLeft !== currentLeft) projectsCluster.style.left = nextLeft + "px";
+    if (nextTop !== currentTop) projectsCluster.style.top = nextTop + "px";
+  }
+
+  function bindProjectsWidgetDrag() {
+    if (!projectsCluster || !projectsWidget) return;
+
+    let pointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let originLeft = 0;
+    let originTop = 0;
+
+    projectsCluster.addEventListener("pointerdown", (event) => {
+      if (usesResponsiveGrid() || event.button !== 0 || !event.target.closest(".projects-widget") || event.target.closest(".icon")) return;
+
+      const desktopRect = desktopEl.getBoundingClientRect();
+      const widgetRect = projectsCluster.getBoundingClientRect();
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      startY = event.clientY;
+      originLeft = widgetRect.left - desktopRect.left;
+      originTop = widgetRect.top - desktopRect.top;
+      projectsCluster.setPointerCapture?.(pointerId);
+      projectsWidget.classList.add("is-dragging");
+      event.preventDefault();
+    });
+
+    projectsCluster.addEventListener("pointermove", (event) => {
+      if (event.pointerId !== pointerId) return;
+
+      const desktopRect = desktopEl.getBoundingClientRect();
+      const widgetRect = projectsCluster.getBoundingClientRect();
+      const maxLeft = Math.max(8, desktopRect.width - widgetRect.width - 8);
+      const maxTop = Math.max(8, desktopRect.height - widgetRect.height - 82);
+      const nextLeft = Utils.clamp(originLeft + event.clientX - startX, 8, maxLeft);
+      const nextTop = Utils.clamp(originTop + event.clientY - startY, 8, maxTop);
+      projectsCluster.style.left = nextLeft + "px";
+      projectsCluster.style.top = nextTop + "px";
+      event.preventDefault();
+    });
+
+    function finishWidgetDrag(event) {
+      if (event.pointerId !== pointerId) return;
+      projectsCluster.releasePointerCapture?.(pointerId);
+      projectsWidget.classList.remove("is-dragging");
+      pointerId = null;
+    }
+
+    projectsCluster.addEventListener("pointerup", finishWidgetDrag);
+    projectsCluster.addEventListener("pointercancel", finishWidgetDrag);
   }
 
   function renderIcon(item) {
@@ -99,32 +261,41 @@ const Desktop = (() => {
     bindIconEvents(item, node);
   }
 
-  /** Fixed opening arrangement matching the supplied desktop screenshot.
-   * Four project folders on top, three tools below, Archives top-right.
-   * Positions are recalculated for the available desktop space only.
+  /** Match the reference desktop: the creative apps form a row beside the
+   * projects and clock, while Resume and Archives sit below Contact.
+   * Mobile keeps using its existing CSS grid and never enters this function.
    */
   function getDefaultGridPositions() {
     const rect = desktopEl.getBoundingClientRect();
-    const widgets = desktopEl.querySelector(".desktop-widgets");
-    const widgetRight = widgets ? widgets.getBoundingClientRect().right - rect.left : 0;
+    const projectsClusterRect = projectsCluster?.getBoundingClientRect();
+    const contactRect = contactWidget?.getBoundingClientRect();
     const iconWidth = 92;
-    const gap = 24;
-    const step = iconWidth + gap;
-    // Reflow into columns at intermediate widths instead of squeezing icons.
-    // The wide-screen screenshot arrangement remains unchanged.
-    const columns = rect.width <= 1050 ? 2 : rect.width <= 1350 ? 3 : 4;
-    const ids = ["project-02", "project-01", "project-03", "project-04", "play", "color-lab", "cv"];
-    const groupWidth = columns * iconWidth + (columns - 1) * gap;
-    const minLeft = Math.max(16, widgetRight + 20);
-    const maxLeft = Math.max(16, rect.width - groupWidth - 20);
-    const left = Utils.clamp(rect.width * 0.48 - groupWidth / 2, Math.min(minLeft, maxLeft), maxLeft);
-    const top = Math.max(48, Math.min(170, rect.height * 0.18));
-    const rowStep = Math.max(112, Math.min(145, rect.height * 0.17));
     const result = {};
-    ids.forEach((id, index) => {
-      result[id] = { x: left + (index % columns) * step, y: top + Math.floor(index / columns) * rowStep };
+
+    const clusterRight = projectsClusterRect
+      ? projectsClusterRect.right - rect.left
+      : 688;
+    const contactLeft = contactRect
+      ? contactRect.left - rect.left
+      : rect.width - 238;
+    const appCorridor = Math.max(0, contactLeft - clusterRight);
+    const appsLeftGap = Utils.clamp((appCorridor - iconWidth - 300) / 5, 8, 66);
+    const appsLeft = clusterRight + appsLeftGap;
+    const appStep = Utils.clamp(
+      (contactLeft - appsLeft - iconWidth - 8) / 3,
+      82,
+      126
+    );
+    const appsTop = 43;
+
+    ["font-book", "color-lab", "experiments", "play"].forEach((id, index) => {
+      result[id] = { x: appsLeft + index * appStep, y: appsTop };
     });
-    result.archives = { x: Math.max(8, rect.width - iconWidth - 26), y: 28 };
+
+    const filesLeft = Utils.clamp(contactLeft, 16, Math.max(16, rect.width - iconWidth * 2 - 32));
+    const filesTop = contactRect ? contactRect.bottom - rect.top + 35 : 204;
+    result.cv = { x: filesLeft, y: filesTop };
+    result.archives = { x: filesLeft + 101, y: filesTop };
     return result;
   }
 
@@ -151,6 +322,7 @@ const Desktop = (() => {
 
   function placeInsideViewport(item) {
     if (!item.__el || usesResponsiveGrid()) return;
+    if (item.kind === "project" && projectsWidget?.contains(item.__el)) return;
 
     const desired = naturalPositions[item.id] || {
       x: positions[item.id]?.x ?? item.x,
@@ -178,13 +350,19 @@ const Desktop = (() => {
   }
 
   function layoutIconsForViewport() {
+    syncProjectCompartment();
+
     // Under 800px the CSS already switches the desktop icons to a responsive
     // grid. When returning to desktop mode, their saved positions are restored.
     if (usesResponsiveGrid()) return;
 
+    keepProjectsWidgetVisible();
+
     const defaultPositions = getDefaultGridPositions();
 
     DESKTOP_ITEMS.forEach((item) => {
+      if (item.kind === "project" && projectsWidget?.contains(item.__el)) return;
+
       if (!positions[item.id] && defaultPositions[item.id]) {
         const next = defaultPositions[item.id];
         naturalPositions[item.id] = { ...next };
@@ -243,6 +421,7 @@ const Desktop = (() => {
       // On phones the icons behave like a regular home-screen grid. Keeping
       // them fixed prevents an old drag offset from hiding them under widgets.
       if (usesResponsiveGrid()) return;
+      if (item.kind === "project" && projectsWidget?.contains(node)) return;
       if (e.pointerType === "mouse" || (!usesResponsiveGrid() && !usesTouchInteraction())) return;
 
       e.stopPropagation();
@@ -311,6 +490,7 @@ const Desktop = (() => {
       // On tablets and phones CSS arranges the icons in a responsive grid.
       // Dragging is disabled there so saved desktop coordinates cannot break it.
       if (usesResponsiveGrid()) return;
+      if (item.kind === "project" && projectsWidget?.contains(node)) return;
 
       dragging = true;
       moved = false;

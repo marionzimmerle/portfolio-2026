@@ -17,17 +17,19 @@
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/desktop.css?v=21">
 <link rel="stylesheet" href="css/menubar.css?v=13">
-<link rel="stylesheet" href="css/icons.css?v=6">
+<link rel="stylesheet" href="css/icons.css?v=8">
 <link rel="stylesheet" href="css/dock.css?v=15">
 <link rel="stylesheet" href="css/windows.css?v=5">
 <link rel="stylesheet" href="css/game.css?v=26">
 <link rel="stylesheet" href="css/cv.css?v=7">
-<link rel="stylesheet" href="css/widgets.css?v=6">
-<link rel="stylesheet" href="css/panels.css?v=12">
+<link rel="stylesheet" href="css/widgets.css?v=37">
+<link rel="stylesheet" href="css/panels.css?v=14">
 <link rel="stylesheet" href="css/colorlab.css?v=1">
+<link rel="stylesheet" href="css/fontbook.css?v=3">
   <link rel="stylesheet" href="css/projects.css?v=11">
-  <link rel="stylesheet" href="css/mobile.css?v=25">
-<link rel="stylesheet" href="css/signature.css?v=1">
+  <link rel="stylesheet" href="css/mobile.css?v=32">
+<link rel="stylesheet" href="css/signature.css?v=6">
+<link rel="stylesheet" href="css/experiments.css?v=3">
 </head>
 <body>
 
@@ -155,7 +157,8 @@
     <aside class="desktop-widgets" aria-label="Portfolio widgets">
       <div class="widgets-profile-row">
         <section class="desktop-widget photo-widget" aria-label="Profile photo">
-          <img src="assets/pp.jpg" alt="Profile photo">
+          <img class="desktop-profile-photo" src="assets/pp.jpg" alt="Profile photo">
+          <img class="mobile-profile-logo" src="assets/logo-mzi-mobile-gris.svg?v=1" alt="Marion Zimmerlé Izquierdo">
         </section>
 
         <section class="desktop-widget identity-widget" aria-label="Profile information">
@@ -177,17 +180,8 @@
         <p class="intro-widget__mobile-copy">Welcome to my portfolio! Discover my creative projects in this macOS-inspired space. Tap the icons below to explore my work, learn about my background, and get to know my creative world. Enjoy your visit!</p><span class="intro-widget__touch">Tap an icon to explore ↓</span>
       </section>
 
-      <section class="desktop-widget clock-calendar-widget" aria-label="Clock and calendar">
-        <div class="clock-calendar__topline">
-          <div>
-            <p class="desktop-widget__eyebrow">CLOCK &amp; CALENDAR</p>
-            <time class="clock-calendar__time" id="calendarClock" datetime="">00:00</time>
-          </div>
-          <p class="clock-calendar__date" id="calendarFullDate"></p>
-        </div>
-
-        <div class="clock-calendar__divider" aria-hidden="true"></div>
-
+      <section class="desktop-widget calendar-widget" aria-label="Monthly calendar">
+        <p class="desktop-widget__eyebrow">CALENDAR</p>
         <div class="clock-calendar__header">
           <button class="clock-calendar__nav" id="calendarPrevious" type="button" aria-label="Previous month">‹</button>
           <button class="clock-calendar__month" id="calendarMonth" type="button" aria-label="Return to today"></button>
@@ -205,6 +199,43 @@
         <div class="language-row"><span><b>German</b><em>A1</em></span><i style="--level:28%"></i></div>
       </section>
     </aside>
+
+    <div class="projects-cluster">
+      <section class="desktop-widget projects-widget" aria-label="My projects">
+        <p class="desktop-widget__eyebrow">MY PROJECTS</p>
+        <div class="projects-widget__grid" data-projects-widget-grid></div>
+      </section>
+
+      <section class="desktop-widget clock-widget" aria-label="Clock">
+        <p class="desktop-widget__eyebrow">CLOCK</p>
+        <time class="clock-widget__face" id="portfolioClock" datetime="" aria-label="Current time">
+          <span class="clock-widget__hand clock-widget__hand--hour" id="portfolioClockHour" aria-hidden="true"></span>
+          <span class="clock-widget__hand clock-widget__hand--minute" id="portfolioClockMinute" aria-hidden="true"></span>
+          <span class="clock-widget__hand clock-widget__hand--second" id="portfolioClockSecond" aria-hidden="true"></span>
+          <span class="clock-widget__pin" aria-hidden="true"></span>
+        </time>
+      </section>
+    </div>
+
+    <section class="desktop-widget contact-widget" aria-label="Contact">
+      <div class="contact-widget__top">
+        <p class="desktop-widget__eyebrow">CONTACT</p>
+        <span class="contact-widget__status"><span aria-hidden="true"></span>AVAILABLE</span>
+      </div>
+      <div class="contact-widget__header">
+        <div class="contact-widget__copy">
+          <strong>Let's create together</strong>
+          <span>Have a project in mind?</span>
+        </div>
+        <span class="contact-widget__icon" aria-hidden="true">
+          <img src="assets/icons/mail-new.png" alt="">
+        </span>
+      </div>
+      <button class="contact-widget__button" id="contactWidgetButton" type="button">
+        <span>Write to me</span><span class="contact-widget__button-arrow" aria-hidden="true">→</span>
+      </button>
+    </section>
+
     <!-- Icons (PROJECT folders, CV, ARCHIVES, PLAY)
          are generated dynamically by js/desktop.js?v=3 from js/data.js?v=25 -->
   </main>
@@ -322,21 +353,26 @@
 
   <!-- ===================== SCRIPTS ===================== -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script src="js/i18n.js?v=8"></script>
-  <script src="js/data.js?v=37"></script>
+  <script src="js/i18n.js?v=20"></script>
+  <script src="js/data.js?v=23"></script>
   <script src="js/utils.js"></script>
   <script src="js/menubar.js?v=8"></script>
-  <script src="js/calendar.js?v=1"></script>
+  <script src="js/calendar.js?v=2"></script>
   <script src="js/windows.js?v=3"></script>
-  <script src="js/interface.js?v=15"></script>
-  <script src="js/desktop.js?v=6"></script>
+  <script src="js/interface.js?v=16"></script>
+  <script src="js/desktop.js?v=14"></script>
+  <script src="js/experiments.js?v=2"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
   <script src="js/game.js?v=26"></script>
   <script src="js/cv.js?v=6"></script>
-  <script src="js/colorlab.js?v=1"></script>
+  <script src="js/colorlab.js?v=2"></script>
+  <script src="js/fontbook.js?v=3"></script>
   <script src="js/projects.js?v=11"></script>
   <script src="js/mobile.js?v=17"></script>
   <script src="js/main.js"></script>
+<div class="portfolio-logo-signature" aria-label="Marion Zimmerlé Izquierdo">
+  <img src="assets/logo-mzi-glass.svg?v=4" alt="Marion Zimmerlé Izquierdo">
+</div>
 <div class="portfolio-signature" aria-label="Crédit de création">Designed &amp; developed by Marion Zimmerlé Izquierdo © 2026</div>
 </body>
 </html>

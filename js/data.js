@@ -371,6 +371,22 @@ const DESKTOP_ITEMS = [
     window: null
   },
   {
+    id: "font-book",
+    name: "FONT BOOK",
+    type: "file",
+    kind: "fontbook",
+    icon: "assets/icons/font-book-aa.png?v=2",
+    x: 1040,
+    y: 43,
+    window: {
+      title: "Font Book",
+      width: 780,
+      height: 520,
+      centered: true,
+      content: `<div class="fontbook-app" data-fontbook-app></div>`
+    }
+  },
+  {
     id: "play",
     name: "CHESS",
     type: "file",
@@ -395,14 +411,14 @@ const DESKTOP_ITEMS = [
   },
   {
     id: "color-lab",
-    name: "COLOR LAB",
+    name: "PALETTE",
     type: "file",
     kind: "colorlab",
     icon: "assets/icons/colorlab.png",
     x: 560,
     y: 200,
     window: {
-      title: "Color Lab",
+      title: "Palette",
       width: 780,
       height: 560,
       centered: true,
@@ -410,7 +426,7 @@ const DESKTOP_ITEMS = [
         <div class="color-lab" data-color-lab>
           <header class="color-lab__header">
             <div>
-              <span class="color-lab__eyebrow">COLOR LAB</span>
+              <span class="color-lab__eyebrow">PALETTE</span>
               <h2>Create your palette</h2>
               <p>Generate a combination, lock the colors you love, then copy their HEX codes.</p>
             </div>
@@ -421,7 +437,15 @@ const DESKTOP_ITEMS = [
                   <option value="curated">Curated</option>
                   <option value="analogous">Analogous</option>
                   <option value="complementary">Complementary</option>
+                  <option value="split-complementary">Split complementary</option>
+                  <option value="triadic">Triadic</option>
+                  <option value="tetradic">Tetradic</option>
                   <option value="monochrome">Monochrome</option>
+                  <option value="pastel">Pastel</option>
+                  <option value="warm">Warm tones</option>
+                  <option value="cool">Cool tones</option>
+                  <option value="earthy">Earthy tones</option>
+                  <option value="vibrant">Vibrant</option>
                 </select>
               </label>
               <button type="button" class="color-lab__generate" data-color-generate>Generate palette</button>
@@ -436,6 +460,69 @@ const DESKTOP_ITEMS = [
           </footer>
         </div>
       `
+    }
+  },
+  {
+    id: "experiments",
+    name: "LAB",
+    type: "file",
+    kind: "experiments",
+    icon: "assets/icons/experiments.png",
+    x: 480,
+    y: 430,
+    window: {
+      title: "LAB",
+      width: 970,
+      height: 710,
+      centered: true,
+      content: `<div class="experiments-app" data-experiments-app>
+  <div class="exp-wrap">
+   <header class="exp-hero">
+    <div><p class="exp-eyebrow">PERSONAL PLAYGROUND / VISUAL TESTS</p><h1>LAB<span style="color:#b4a4d4">.</span></h1><p>A collection of visual sketches, material studies, playful typography and moving images.</p></div>
+   </header>
+   <nav class="exp-toolbar" aria-label="Filter experiments">
+      <button class="exp-filter is-active" type="button" data-exp-category="all" aria-pressed="true">ALL</button>
+      <button class="exp-filter" type="button" data-exp-category="visual" aria-pressed="false">STILLS</button>
+      <button class="exp-filter" type="button" data-exp-category="motion" aria-pressed="false">MOTION</button>
+   </nav>
+   <section class="exp-grid" aria-label="Experimental works">
+<button class="exp-card exp-card--type" type="button" data-exp-item data-exp-filter="motion" data-exp-kind="video" data-exp-source="assets/experiments/kinetic-type.mp4" data-exp-title-en="Kinetic type" data-exp-title-fr="Typographie animée" data-exp-meta-en="Type animation" data-exp-meta-fr="Animation typographique" aria-label="Open Kinetic type">
+   <span class="exp-card__art"><img src="assets/experiments/kinetic-type-poster.jpg" alt="Kinetic type" loading="lazy"><span class="exp-card__play" aria-hidden="true">▶</span></span>
+   <span class="exp-card__foot"><span><span class="exp-card__label">MOTION</span><strong class="exp-card__name">Kinetic type</strong></span><span class="exp-card__arrow" aria-hidden="true">↗</span></span>
+ </button>
+<button class="exp-card exp-card--claw" type="button" data-exp-item data-exp-filter="visual" data-exp-kind="image" data-exp-source="assets/experiments/claw-machine.png" data-exp-title-en="Claw machine" data-exp-title-fr="Machine à pince" data-exp-meta-en="3D render · Blender" data-exp-meta-fr="Rendu 3D · Blender" aria-label="Open Claw machine">
+   <span class="exp-card__art"><img src="assets/experiments/claw-machine.png" alt="Claw machine — 3D render" loading="lazy"></span>
+   <span class="exp-card__foot"><span><span class="exp-card__label">3D / BLENDER</span><strong class="exp-card__name">Claw machine</strong></span><span class="exp-card__arrow" aria-hidden="true">↗</span></span>
+ </button>
+<button class="exp-card exp-card--hearts" type="button" data-exp-item data-exp-filter="visual" data-exp-kind="image" data-exp-source="assets/experiments/chrome-hearts.jpg" data-exp-title-en="Chrome hearts" data-exp-title-fr="Cœurs chromés" data-exp-meta-en="Visual study" data-exp-meta-fr="Étude visuelle" aria-label="Open Chrome hearts">
+   <span class="exp-card__art"><img src="assets/experiments/chrome-hearts.jpg" alt="Chrome hearts" loading="lazy"></span>
+   <span class="exp-card__foot"><span><span class="exp-card__label">CHROME</span><strong class="exp-card__name">Chrome hearts</strong></span><span class="exp-card__arrow" aria-hidden="true">↗</span></span>
+ </button>
+<button class="exp-card exp-card--glass" type="button" data-exp-item data-exp-filter="visual" data-exp-kind="image" data-exp-source="assets/experiments/glass-form.png" data-exp-title-en="Liquid glass" data-exp-title-fr="Verre liquide" data-exp-meta-en="Material exploration" data-exp-meta-fr="Recherche de matière" aria-label="Open Liquid glass">
+   <span class="exp-card__art"><img src="assets/experiments/glass-form.png" alt="Liquid glass" loading="lazy"></span>
+   <span class="exp-card__foot"><span><span class="exp-card__label">GLASS</span><strong class="exp-card__name">Liquid glass</strong></span><span class="exp-card__arrow" aria-hidden="true">↗</span></span>
+ </button>
+<button class="exp-card exp-card--flowers" type="button" data-exp-item data-exp-filter="visual" data-exp-kind="image" data-exp-source="assets/experiments/chrome-flowers.jpg" data-exp-title-en="Chrome florals" data-exp-title-fr="Fleurs chromées" data-exp-meta-en="3D study" data-exp-meta-fr="Étude 3D" aria-label="Open Chrome florals">
+   <span class="exp-card__art"><img src="assets/experiments/chrome-flowers.jpg" alt="Chrome florals" loading="lazy"></span>
+   <span class="exp-card__foot"><span><span class="exp-card__label">CHROME</span><strong class="exp-card__name">Chrome florals</strong></span><span class="exp-card__arrow" aria-hidden="true">↗</span></span>
+ </button>
+<button class="exp-card exp-card--pink" type="button" data-exp-item data-exp-filter="visual" data-exp-kind="image" data-exp-source="assets/experiments/pink-lettering.png" data-exp-title-en="Typography" data-exp-title-fr="Typographie" data-exp-meta-en="Lettering exploration" data-exp-meta-fr="Exploration typographique" aria-label="Open Typography">
+   <span class="exp-card__art"><img src="assets/experiments/pink-lettering.png" alt="Typography" loading="lazy"></span>
+   <span class="exp-card__foot"><span><span class="exp-card__label">TYPE</span><strong class="exp-card__name">Typography</strong></span><span class="exp-card__arrow" aria-hidden="true">↗</span></span>
+ </button>
+<button class="exp-card exp-card--motion" type="button" data-exp-item data-exp-filter="motion" data-exp-kind="video" data-exp-source="assets/experiments/liquid-type.mp4" data-exp-title-en="Liquid lettering" data-exp-title-fr="Lettrage liquide" data-exp-meta-en="3D animation" data-exp-meta-fr="Animation 3D" aria-label="Open Liquid lettering">
+   <span class="exp-card__art"><img src="assets/experiments/liquid-type-poster.jpg" alt="Liquid lettering" loading="lazy"><span class="exp-card__play" aria-hidden="true">▶</span></span>
+   <span class="exp-card__foot"><span><span class="exp-card__label">MOTION</span><strong class="exp-card__name">Liquid lettering</strong></span><span class="exp-card__arrow" aria-hidden="true">↗</span></span>
+ </button>
+   </section>
+   <p class="exp-footer">An evolving collection · art direction, materials, type &amp; motion</p>
+  </div>
+  <section class="exp-viewer" role="dialog" aria-modal="true" aria-label="Artwork preview" data-exp-viewer hidden>
+    <div class="exp-viewer__bar"><span class="exp-viewer__bar-label">LAB</span><button type="button" class="exp-viewer__close" data-exp-close aria-label="Close preview">×</button></div>
+    <div class="exp-viewer__body"><button type="button" class="exp-viewer__nav" data-exp-prev aria-label="Previous artwork">‹</button><div class="exp-viewer__media" data-exp-media></div><button type="button" class="exp-viewer__nav" data-exp-next aria-label="Next artwork">›</button></div>
+    <footer class="exp-viewer__caption"><strong data-exp-title></strong><p data-exp-meta></p></footer>
+  </section>
+</div>`
     }
   }
 ];

@@ -244,6 +244,7 @@ const PortfolioInterface = (() => {
     const nameButton = document.getElementById("menubarName");
     const nameMenu = document.getElementById("menubarDropdown");
     const contact = nameMenu?.querySelector('[data-menubar-action="contact"]');
+    const contactWidgetButton = document.getElementById("contactWidgetButton");
     const about = nameMenu?.querySelector('[data-menubar-action="about"]');
 
     const fileButton = document.getElementById("menubarFileButton");
@@ -294,6 +295,11 @@ const PortfolioInterface = (() => {
     });
 
     contact.addEventListener("click", (event) => {
+      closeAllMenus();
+      openItem(SYSTEM_ITEMS.contact, event);
+    });
+
+    contactWidgetButton?.addEventListener("click", (event) => {
       closeAllMenus();
       openItem(SYSTEM_ITEMS.contact, event);
     });

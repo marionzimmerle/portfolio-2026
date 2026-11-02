@@ -1,10 +1,12 @@
 /* =========================================================================
-   calendar.js — live clock and interactive monthly calendar widget
+   calendar.js — separate analog clock and interactive monthly calendar
    ========================================================================= */
 
 const PortfolioCalendar = (() => {
-  const clockEl = document.getElementById("calendarClock");
-  const dateEl = document.getElementById("calendarFullDate");
+  const clockEl = document.getElementById("portfolioClock");
+  const hourHand = document.getElementById("portfolioClockHour");
+  const minuteHand = document.getElementById("portfolioClockMinute");
+  const secondHand = document.getElementById("portfolioClockSecond");
   const monthEl = document.getElementById("calendarMonth");
   const gridEl = document.getElementById("calendarGrid");
   const previousButton = document.getElementById("calendarPrevious");
@@ -19,20 +21,26 @@ const PortfolioCalendar = (() => {
   }
 
   function updateClock() {
-    if (!clockEl || !dateEl) return;
+    if (!clockEl || !hourHand || !minuteHand || !secondHand) return;
 
     const now = new Date();
     const locale = language();
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    const hourDegrees = ((hours % 12) + minutes / 60) * 30;
+    const minuteDegrees = (minutes + seconds / 60) * 6;
+    const secondDegrees = seconds * 6;
 
-    clockEl.textContent = `${hours}:${minutes}`;
+    hourHand.style.transform = `translateX(-50%) rotate(${hourDegrees}deg)`;
+    minuteHand.style.transform = `translateX(-50%) rotate(${minuteDegrees}deg)`;
+    secondHand.style.transform = `translateX(-50%) rotate(${secondDegrees}deg)`;
     clockEl.dateTime = now.toISOString();
-    dateEl.textContent = new Intl.DateTimeFormat(locale, {
-      weekday: "long",
-      day: "numeric",
-      month: "long"
-    }).format(now);
+    clockEl.setAttribute("aria-label", new Intl.DateTimeFormat(locale, {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    }).format(now));
   }
 
   function mondayFirstIndex(jsDay) {
@@ -114,7 +122,7 @@ const PortfolioCalendar = (() => {
   }
 
   function init() {
-    if (!clockEl || !dateEl || !monthEl || !gridEl) return;
+    if (!monthEl || !gridEl) return;
 
     refresh();
     setInterval(updateClock, 1000);

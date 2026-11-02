@@ -115,6 +115,19 @@
   max-width: none;
 }
 
+/* The black Aa is an isolated object like Chess, with no app tile. */
+.icon[data-kind="fontbook"] .icon__custom-img {
+  width: 96%;
+  height: 96%;
+  max-width: none;
+}
+
+.icon[data-kind="fontbook"] .icon__label-text {
+  padding-inline: 3px;
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+
 .icon__label {
   max-width: 100%;
 }
