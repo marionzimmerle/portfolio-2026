@@ -58,7 +58,7 @@
   .projects-cluster { display: none !important; }
 
   .photo-widget,
-  .identity-widget { height: 112px; }
+  .identity-widget { height: 96px; }
   .photo-widget {
     box-sizing: border-box;
     display: flex;
