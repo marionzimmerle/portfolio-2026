@@ -114,7 +114,7 @@ const PortfolioI18n = (() => {
     "INTERNSHIP REPORT — EDITORIAL DESIGN": "RAPPORT DE STAGE — DESIGN ÉDITORIAL",
     "ANA’S GALLERY": "ANA’S GALLERY",
     "Tap an icon to explore my projects ↓": "Touchez une icône pour explorer mes projets ↓",
-    "Welcome to my portfolio! Discover my creative projects in this macOS-inspired space. Tap the icons below to explore my work, learn about my background, and get to know my creative world. Enjoy your visit!": "Bienvenue dans mon portfolio ! Découvrez mes projets créatifs à travers cet espace inspiré de l’univers macOS. Touchez les icônes ci-dessous pour explorer mes réalisations, découvrir mon parcours et en apprendre davantage sur mon univers. Bonne visite !",
+    "Welcome to my portfolio! Discover my creative projects. Tap the icons below to explore my work, learn about my background, and get to know my creative world. Enjoy your visit!": "Bienvenue dans mon portfolio ! Découvrez mes projets créatifs. Touchez les icônes ci-dessous pour explorer mes réalisations, découvrir mon parcours et en apprendre davantage sur mon univers. Bonne visite !",
     "Tap an icon to explore ↓": "Touchez une icône pour explorer ↓",
     "Available for freelance work": "Disponible en freelance",
     "Available for freelance work.": "Disponible en freelance.",
